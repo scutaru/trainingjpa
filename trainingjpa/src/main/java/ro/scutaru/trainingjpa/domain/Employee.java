@@ -10,24 +10,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="EMP_TYPES")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "EMP_TYPES")
 public class Employee {
 
 	@Id
-    @GeneratedValue
-    private int id;
-    private String firstName;
-    private char middleInitial;
-    private String lastName;
-    private String streetAddress;
-    private String city;
-    private String country;
-    @ManyToOne
-    @JoinColumn(name="dept_fk")
-    private Department dept;
- 
-    public Employee(String firstName, char middleInitial, String lastName,
+	@GeneratedValue
+	private int id;
+	private String firstName;
+	private char middleInitial;
+	private String lastName;
+	private String streetAddress;
+	private String city;
+	private String country;
+	@ManyToOne
+	@JoinColumn(name = "dept_fk")
+	private Department dept;
+
+	public Employee(String firstName, char middleInitial, String lastName,
 			String streetAddress, String city, String country) {
 		super();
 		this.firstName = firstName;
@@ -39,7 +39,7 @@ public class Employee {
 	}
 
 	public Employee() {
-    }
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -96,5 +96,5 @@ public class Employee {
 	public void setDept(Department dept) {
 		this.dept = dept;
 	}
-	
+
 }
