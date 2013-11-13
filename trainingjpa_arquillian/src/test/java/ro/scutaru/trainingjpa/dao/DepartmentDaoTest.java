@@ -2,18 +2,15 @@ package ro.scutaru.trainingjpa.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.UserTransaction;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.persistence.PersistenceTest;
+import org.jboss.arquillian.persistence.TransactionMode;
+import org.jboss.arquillian.persistence.Transactional;
+import org.jboss.arquillian.persistence.UsingDataSet;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
@@ -25,13 +22,9 @@ import ro.scutaru.trainingjpa.domain.Department;
 import ro.scutaru.trainingjpa.domain.Employee;
 
 @RunWith(Arquillian.class)
+@PersistenceTest
+@Transactional(TransactionMode.ROLLBACK)
 public class DepartmentDaoTest {
-	@PersistenceContext
-	private EntityManager em;
-
-	@Inject
-	private UserTransaction utx;
-
 	@Inject
 	private DepartmentDao dao;
 
@@ -41,36 +34,18 @@ public class DepartmentDaoTest {
 				.create(WebArchive.class, "test.war")
 				.addPackage(Employee.class.getPackage())
 				.addPackage(EmployeeDao.class.getPackage())
-				.addAsResource("test-persistence.xml",
-						"META-INF/persistence.xml")
+				.addAsResource("META-INF/persistence.xml")
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
 	@Test
+	@UsingDataSet({ "datasets/departments.xml","datasets/employees.xml" })
 	public void shouldFindADepartmentByName() throws Exception {
-		insertDepartments("IT","HR");
-
 		Department dept = dao.findDepartmentByName("IT");
 
 		assertNotNull(dept);
-	}
-
-	// ------------------------------------------------------------
-
-	private void insertDepartments(String...deptNames) throws Exception {
-		utx.begin();
-		em.joinTransaction();
-		
-		for (String deptName:deptNames) {
-			em.persist(createDepartment(deptName));
-		}
-		utx.commit();
-	}
-
-	private Department createDepartment(String deptName) {
-		Department d = new Department();
-		d.setName(deptName);
-		return d;
+		assertEquals("IT", dept.getName());
+		assertEquals(2, dept.getEmployees().size());
 	}
 
 }

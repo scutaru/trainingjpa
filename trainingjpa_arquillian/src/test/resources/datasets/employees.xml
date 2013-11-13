@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<employee id="-1000" firstName="Ionut" lastName="Scutaru"
+		dept_fk="-2000" />
+	<employee id="-1001" firstName="Ionut2" lastName="Scutaru2"
+		dept_fk="-2000" />
+</dataset>

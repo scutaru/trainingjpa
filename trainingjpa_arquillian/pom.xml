@@ -6,88 +6,54 @@
 	<groupId>ro.scutaru</groupId>
 	<artifactId>trainingjpa_arquillian</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>trainingjpa_arquillian</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	   <junit.version>4.8.2</junit.version>
+	   <arquillian.version>1.0.2.Final</arquillian.version>
+	   <arquillan.glassfish.embedded.version>1.0.0.CR3</arquillan.glassfish.embedded.version>
+	   <arquillian_persistence.version>1.0.0.Alpha5</arquillian_persistence.version>
+	   <glassfish.embedded.all.version>3.1.2</glassfish.embedded.all.version>
+	   <ejb.version>3.1</ejb.version>
+	   <jpa.version>2.0.0</jpa.version>
+	   <eclipselink.version>2.3.2</eclipselink.version>
+	   <mysql.version>5.1.19</mysql.version>
+	   <maven.compiler.plugin.version>2.5.1</maven.compiler.plugin.version>
+	   <jsf.api.version>2.1.0</jsf.api.version>
 	</properties>
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.jboss.arquillian</groupId>
-				<artifactId>arquillian-bom</artifactId>
-				<version>1.1.1.Final</version>
-				<scope>import</scope>
-				<type>pom</type>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.12</version>
-				<configuration>
-					<systemPropertyVariables>
-						<java.util.logging.config.file>
-							${project.build.testOutputDirectory}/logging.properties
-						</java.util.logging.config.file>
-						<derby.stream.error.file>
-							${project.build.directory}/derby.log
-						</derby.stream.error.file>
-					</systemPropertyVariables>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-jpamodelgen</artifactId>
-			<version>1.2.0.Final</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>1.8.5</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-integration</artifactId>
-			<version>1.2.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.arquillian.junit</groupId>
-			<artifactId>arquillian-junit-container</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+	
+	<repositories>
+		<repository>
+			<id>EclipseLink Repo</id>
+			<url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo</url>
+			<!-- use this for javax.persistence <snapshots> <enabled>true</enabled> 
+				</snapshots> -->
+		</repository>
+		<repository>
+			<id>Glassfish</id>
+			<name>http://download.java.net/maven/glassfish</name>
+			<url>http://download.java.net/maven/glassfish</url>
+		</repository>
+		<repository>
+            <id>jboss-public-repository-group</id>
+            <name>JBoss Public Maven Repository Group</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+            <layout>default</layout>
+        </repository>
+		<repository>
+            <id>jboss-public-repository-group 2</id>
+            <name>JBoss Public Maven Repository Group</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+            <layout>default</layout>
+        </repository>
+	</repositories>
+		
 	<profiles>
 		<profile>
-			<id>arquillian-glassfish-embedded</id>
+			<id>glassfish</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
@@ -95,39 +61,107 @@
 				<dependency>
 					<groupId>org.jboss.arquillian.container</groupId>
 					<artifactId>arquillian-glassfish-embedded-3.1</artifactId>
-					<version>1.0.0.CR3</version>
+					<version>${arquillan.glassfish.embedded.version}</version>
 					<scope>test</scope>
 				</dependency>
 				<dependency>
 					<groupId>org.glassfish.main.extras</groupId>
 					<artifactId>glassfish-embedded-all</artifactId>
-					<version>3.1.2</version>
-					<scope>provided</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-		<profile>
-			<id>arquillian-jbossas-managed</id>
-			<dependencies>
-				<dependency>
-					<groupId>org.jboss.spec</groupId>
-					<artifactId>jboss-javaee-6.0</artifactId>
-					<version>1.0.0.Final</version>
-					<type>pom</type>
-					<scope>provided</scope>
-				</dependency>
-				<dependency>
-					<groupId>org.jboss.as</groupId>
-					<artifactId>jboss-as-arquillian-container-managed</artifactId>
-					<version>7.1.1.Final</version>
-					<scope>test</scope>
-				</dependency>
-				<dependency>
-					<groupId>org.jboss.arquillian.protocol</groupId>
-					<artifactId>arquillian-protocol-servlet</artifactId>
+					<version>${glassfish.embedded.all.version}</version>
 					<scope>test</scope>
 				</dependency>
 			</dependencies>
 		</profile>
 	</profiles>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.jboss.arquillian</groupId>
+				<artifactId>arquillian-bom</artifactId>
+				<version>${arquillian.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
+		<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin.version}</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<wtpversion>2.0</wtpversion>
+				</configuration>
+			</plugin>	
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.ejb</artifactId>
+			<version>${ejb.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>javax.persistence</artifactId>
+			<version>${jpa.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>eclipselink</artifactId>
+			<version>${eclipselink.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+		<!-- Optional, I'm using JSF to access my bean -->
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>${jsf.api.version}</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-persistence-api</artifactId>
+			<version>${arquillian_persistence.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-persistence-impl</artifactId>
+			<version>${arquillian_persistence.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>

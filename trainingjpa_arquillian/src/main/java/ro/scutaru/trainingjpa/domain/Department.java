@@ -2,7 +2,9 @@ package ro.scutaru.trainingjpa.domain;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -21,7 +23,7 @@ public class Department {
 
 	private String name;
 
-	@OneToMany
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER, mappedBy="dept")
 	private Collection<Employee> employees;
 
 	public String getName() {

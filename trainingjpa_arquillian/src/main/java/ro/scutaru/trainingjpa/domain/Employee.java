@@ -3,6 +3,7 @@ package ro.scutaru.trainingjpa.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -14,6 +15,7 @@ public class Employee {
 	private int id;
 	private String firstName;
 	private String lastName;
+	@JoinColumn(name="dept_fk")
 	private Department dept;
 
 	public String getFirstName() {
