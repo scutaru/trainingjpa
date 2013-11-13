@@ -40,6 +40,7 @@ public class DepartmentDaoTest {
 
 	@Test
 	@UsingDataSet({ "datasets/departments.xml","datasets/employees.xml" })
+	//@Transactional(TransactionMode.DISABLED)
 	public void shouldFindADepartmentByName() throws Exception {
 		Department dept = dao.findDepartmentByName("IT");
 

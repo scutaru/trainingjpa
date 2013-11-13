@@ -12,6 +12,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	private EntityManager em;
 
 	@Override
+	//@TransactionAttribute(TransactionAttributeType.MANDATORY)
 	public Department findDepartmentByName(String deptName) {
 		return em.createNamedQuery("deptByName", Department.class)
 				.setParameter("name", deptName).getSingleResult();
