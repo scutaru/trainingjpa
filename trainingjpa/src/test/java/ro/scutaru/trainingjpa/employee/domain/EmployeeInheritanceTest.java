@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import ro.scutaru.trainingjpa.employee.domain.ContractorEmployee;
@@ -31,12 +32,15 @@ public class EmployeeInheritanceTest extends EntityTest{
 		assertEquals(1, empFound.size());
 	}
 	
+	/*
+	 * https://forum.hibernate.org/viewtopic.php?f=1&t=1029712
+	 */
+	@Ignore
 	@Test
 	public void exampleSelectingRegularEmployeesUsingTypeKeyword(){
 		List<RegularEmployee> regularEmployees = createRegularEmployees(2);
 		List<ContractorEmployee> contractorEmployees = createContractorEmployees(3);
 
-		
 		em.getTransaction().begin();
 		for(RegularEmployee e:regularEmployees){
 			em.persist(e);
