@@ -1,4 +1,4 @@
-package ro.scutaru.trainingjpa.domain;
+package ro.scutaru.trainingjpa.employee.domain;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,10 @@ import java.util.Collection;
 import java.util.List;
 
 import org.junit.Test;
+
+import ro.scutaru.trainingjpa.employee.domain.Department;
+import ro.scutaru.trainingjpa.employee.domain.Employee;
+import ro.scutaru.trainingjpa.test.EntityTest;
 
 public class DepartmentTest extends EntityTest{
 

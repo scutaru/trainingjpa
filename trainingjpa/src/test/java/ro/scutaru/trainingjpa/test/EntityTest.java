@@ -1,4 +1,4 @@
-package ro.scutaru.trainingjpa.domain;
+package ro.scutaru.trainingjpa.test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

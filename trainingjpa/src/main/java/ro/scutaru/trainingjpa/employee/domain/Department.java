@@ -1,4 +1,4 @@
-package ro.scutaru.trainingjpa.domain;
+package ro.scutaru.trainingjpa.employee.domain;
 
 import java.util.Collection;
 
@@ -17,13 +17,18 @@ public class Department {
 	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="dept")
 	private Collection<Employee> employees;
 
+	public Department() {
+	}
+
 	public Department(String name, Collection<Employee> employees) {
 		super();
 		this.name = name;
 		this.employees = employees;
 	}
 
-	public Department() {
+	public Department(String name) {
+		super();
+		this.name = name;
 	}
 
 	public String getName() {

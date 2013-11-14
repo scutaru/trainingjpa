@@ -1,4 +1,6 @@
-package ro.scutaru.trainingjpa.domain;
+package ro.scutaru.trainingjpa.employee.domain;
+
+import java.sql.Date;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -23,12 +25,22 @@ public class Employee {
 	private String streetAddress;
 	private String city;
 	private String country;
+	private Date birthdate;
+	
+	public Date getBirthdate() {
+		return birthdate;
+	}
+
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "dept_fk")
 	private Department dept;
 
 	public Employee(String firstName, char middleInitial, String lastName,
-			String streetAddress, String city, String country) {
+			String streetAddress, String city, String country, Date birthdate) {
 		super();
 		this.firstName = firstName;
 		this.middleInitial = middleInitial;
@@ -36,6 +48,7 @@ public class Employee {
 		this.streetAddress = streetAddress;
 		this.city = city;
 		this.country = country;
+		this.birthdate=birthdate;
 	}
 
 	public Employee() {

@@ -1,4 +1,6 @@
-package ro.scutaru.trainingjpa.domain;
+package ro.scutaru.trainingjpa.employee.domain;
+
+import java.sql.Date;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -13,8 +15,8 @@ public class RegularEmployee extends Employee{
 
 	public RegularEmployee(String firstName, char middleInitial,
 			String lastName, String streetAddress, String city, String country,
-			double salary) {
-		super(firstName, middleInitial, lastName, streetAddress, city, country);
+			double salary, Date birthdate) {
+		super(firstName, middleInitial, lastName, streetAddress, city, country, birthdate);
 		this.salary = salary;
 	}
 
