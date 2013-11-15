@@ -1,5 +1,7 @@
 package ro.scutaru.trainingjpa.dao;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,4 +19,17 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		return em.createNamedQuery("deptByName", Department.class)
 				.setParameter("name", deptName).getSingleResult();
 	}
+	
+	@Override
+	public List<Department> findDepartmentByEmployeeName(String employeeName){
+		return em.createNamedQuery("deptByEmployeeName", Department.class)
+				.setParameter("name", employeeName).getResultList();
+	}
+
+	@Override
+	public List<Department> findDepartmentByEmployeeName2(String employeeName){
+		return em.createNamedQuery("deptByEmployeeName2", Department.class)
+				.setParameter("name", employeeName).getResultList();
+	}
+
 }

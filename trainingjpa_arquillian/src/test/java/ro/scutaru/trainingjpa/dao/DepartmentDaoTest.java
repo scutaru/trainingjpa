@@ -3,6 +3,8 @@ package ro.scutaru.trainingjpa.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -46,7 +48,23 @@ public class DepartmentDaoTest {
 
 		assertNotNull(dept);
 		assertEquals("IT", dept.getName());
-		assertEquals(2, dept.getEmployees().size());
+		assertEquals(3, dept.getEmployees().size());
 	}
+	
+	@Test
+	@UsingDataSet({ "datasets/departments.xml","datasets/employees.xml" })
+	public void shouldFindDepartmentByEmployeeName() {
+		List<Department> departments = dao.findDepartmentByEmployeeName("Bogdan");
+		assertEquals(1, departments.size());
+	}
+	
+	@Test
+	@UsingDataSet({ "datasets/departments.xml","datasets/employees.xml" })
+	public void shouldFindDepartmentByEmployeeName2() {
+		List<Department> departments = dao.findDepartmentByEmployeeName2("Bogdan");
+		assertEquals(1, departments.size());
+	}
+	
+	
 
 }

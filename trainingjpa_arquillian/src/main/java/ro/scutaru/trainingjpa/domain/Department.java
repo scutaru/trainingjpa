@@ -12,7 +12,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @NamedQueries({
-	@NamedQuery(name="deptByName", query="select d from Department d where d.name=:name")
+	@NamedQuery(name="deptByName", query="select d from Department d where d.name=:name"), 
+	@NamedQuery(name="deptByEmployeeName", query ="select d from Department d where d.id in (select e.dept.id from Employee e where e.firstName=:name)"),
+	@NamedQuery(name="deptByEmployeeName2", query ="select d from Department d where exists (select e.dept from Employee e where e.firstName=:name and e.dept=d)")
 })
 @Entity
 public class Department {

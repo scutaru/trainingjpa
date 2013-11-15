@@ -188,15 +188,6 @@ public class EmployeeTest extends EntityTest {
 		assertEquals(5, foundEmployees.size());
 	}
 
-	private List<Employee> union(List<Employee> employeesIT,
-			List<Employee> employeesHR) {
-		List<Employee> employees = new ArrayList<Employee>(employeesIT.size()
-				+ employeesHR.size());
-		employees.addAll(employeesIT);
-		employees.addAll(employeesHR);
-		return employees;
-	}
-
 	@Test
 	public void exampleDelete() {
 		Department it = new Department("IT");
@@ -240,6 +231,15 @@ public class EmployeeTest extends EntityTest {
 	}
 
 	// ----------------------------------------------------------------------
+	private List<Employee> union(List<Employee> employeesIT,
+			List<Employee> employeesHR) {
+		List<Employee> employees = new ArrayList<Employee>(employeesIT.size()
+				+ employeesHR.size());
+		employees.addAll(employeesIT);
+		employees.addAll(employeesHR);
+		return employees;
+	}
+	
 	private void persistEmployees(List<Employee> listsOfEmployees) {
 		for (Employee e : listsOfEmployees) {
 			em.persist(e);
