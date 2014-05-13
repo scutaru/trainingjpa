@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 @NamedQueries({ @NamedQuery(name = "allEmployees", query = "select e from Employee e order by e.id") })
 public class Employee {
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String firstName;
 	private String lastName;

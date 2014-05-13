@@ -25,7 +25,7 @@ import javax.persistence.PrePersist;
 public class Department {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
 	private String name;

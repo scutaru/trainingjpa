@@ -6,8 +6,7 @@
 	</engine>
 	<container default="true" qualifier="glassfish">
 		<configuration>
-			<property name="sunResourcesXml">src/test/resources/glassfish-resources.xml
-			</property>
+			<property name="resourcesXml">src/test/resources/glassfish-resources.xml</property>
 		</configuration>
 	</container>
 	<extension qualifier="persistence">
