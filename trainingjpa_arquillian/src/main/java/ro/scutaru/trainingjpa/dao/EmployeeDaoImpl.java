@@ -21,7 +21,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.NEVER)
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	public List<Employee> getAllEmployees() {
 		return em.createNamedQuery("allEmployees", Employee.class).getResultList();
 	}

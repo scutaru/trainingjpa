@@ -10,6 +10,14 @@ public interface DepartmentDao {
 
 	List<Department> findDepartmentByEmployeeName(String employeeName);
 
-	List<Department> findDepartmentByEmployeeName2(String employeeName);
+	Department findDepartmentByNameUsingCriteria(String deptName);
+
+	void createDepartment(String deptName);
+
+	Department findDepartmentByNameWithFetch(String deptName);
+
+	void deleteDepartment(int deptId);
+
+	List<Department> findDepartmentsWhoseNamesStartWith(String deptName);
 
 }
