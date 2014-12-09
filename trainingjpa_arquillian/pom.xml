@@ -12,45 +12,41 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-	   <junit.version>4.8.2</junit.version>
-	   <arquillian.version>1.0.2.Final</arquillian.version>
-	   <arquillan.glassfish.embedded.version>1.0.0.CR3</arquillan.glassfish.embedded.version>
-	   <arquillian_persistence.version>1.0.0.Alpha5</arquillian_persistence.version>
-	   <glassfish.embedded.all.version>3.1.2</glassfish.embedded.all.version>
-	   <ejb.version>3.1</ejb.version>
-	   <jpa.version>2.0.0</jpa.version>
-	   <eclipselink.version>2.5.1</eclipselink.version>
-	   <mysql.version>5.1.19</mysql.version>
-	   <maven.compiler.plugin.version>2.5.1</maven.compiler.plugin.version>
-	   <jsf.api.version>2.1.0</jsf.api.version>
+		<junit.version>4.8.2</junit.version>
+		<arquillian.version>1.0.2.Final</arquillian.version>
+		<arquillan.glassfish.embedded.version>1.0.0.CR4</arquillan.glassfish.embedded.version>
+		<arquillian_persistence.version>1.0.0.Alpha7</arquillian_persistence.version>
+		<glassfish.embedded.all.version>4.1</glassfish.embedded.all.version>
+		<ejb.version>3.1</ejb.version>
+		<jpa.version>2.0.0</jpa.version>
+		<eclipselink.version>2.5.2</eclipselink.version>
+		<mysql.version>5.1.19</mysql.version>
+		<maven.compiler.plugin.version>2.5.1</maven.compiler.plugin.version>
+		<jsf.api.version>2.1.0</jsf.api.version>
 	</properties>
-	
+
 	<repositories>
-	<!-- 
-		<repository>
-			<id>EclipseLink Repo</id>
-			<url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo</url>
-		</repository>
-		 -->
+		<!-- <repository> <id>EclipseLink Repo</id> <url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo</url> 
+			</repository> -->
 		<repository>
 			<id>Glassfish</id>
 			<name>http://download.java.net/maven/glassfish</name>
 			<url>http://download.java.net/maven/glassfish</url>
 		</repository>
 		<repository>
-            <id>jboss-public-repository-group</id>
-            <name>JBoss Public Maven Repository Group</name>
-            <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
-            <layout>default</layout>
-        </repository>
+			<id>jboss-public-repository-group</id>
+			<name>JBoss Public Maven Repository Group</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+			<layout>default</layout>
+		</repository>
 		<repository>
-            <id>jboss-public-repository-group 2</id>
-            <name>JBoss Public Maven Repository Group</name>
-            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
-            <layout>default</layout>
-        </repository>
+			<id>jboss-public-repository-group 2</id>
+			<name>JBoss Public Maven Repository Group</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
+			<layout>default</layout>
+		</repository>
 	</repositories>
-		
+
 	<profiles>
 		<profile>
 			<id>glassfish</id>
@@ -73,7 +69,7 @@
 			</dependencies>
 		</profile>
 	</profiles>
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -85,8 +81,8 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
-		<build>
+
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -104,16 +100,15 @@
 				<configuration>
 					<wtpversion>2.0</wtpversion>
 				</configuration>
-			</plugin>	
+			</plugin>
 		</plugins>
 	</build>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.ejb</artifactId>
-			<version>${ejb.version}</version>
-			<scope>provided</scope>
+		<dependency>	
+		    <groupId>javax</groupId>	
+		    <artifactId>javaee-api</artifactId>
+		    <version>7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
@@ -159,8 +154,21 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.arquillian.extension</groupId>
-			<artifactId>arquillian-persistence-impl</artifactId>
+			<artifactId>arquillian-persistence-dbunit</artifactId>
 			<version>${arquillian_persistence.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-transaction-api</artifactId>
+			<version>1.0.1.Final</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-transaction-jta</artifactId>
+			<version>1.0.1.Final</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

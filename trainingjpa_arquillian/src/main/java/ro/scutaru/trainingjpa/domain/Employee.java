@@ -7,12 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "allEmployees", query = "select e from Employee e order by e.id") })
 public class Employee {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@SequenceGenerator(name="Seq_Gen", sequenceName="Seq_Gen")
+	@Id @GeneratedValue(generator="Seq_Gen", strategy=GenerationType.SEQUENCE) 
 	private int id;
 	private String firstName;
 	private String lastName;

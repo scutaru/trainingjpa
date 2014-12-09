@@ -13,6 +13,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
+import javax.persistence.SequenceGenerator;
 
 @NamedQueries({
 	@NamedQuery(name="deptByName", query="select d from Department d where d.name=:name"), 
@@ -24,8 +25,8 @@ import javax.persistence.PrePersist;
 @Entity
 public class Department {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@SequenceGenerator(name="Seq_Gen", sequenceName="Seq_Gen")
+	@Id @GeneratedValue(generator="Seq_Gen", strategy=GenerationType.SEQUENCE) 
 	private int id;
 
 	private String name;

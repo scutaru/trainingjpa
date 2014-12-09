@@ -45,8 +45,8 @@ public class EmployeeInheritanceTest extends EntityTest{
 		
 		Query query = em.createQuery("SELECT e FROM Employee e WHERE TYPE(e)<>RegularEmployee");
 		@SuppressWarnings("unchecked")
-		List<RegularEmployee> regularEmployeesReturned = query.getResultList();
-		assertEquals(contractorEmployees.size(), regularEmployeesReturned.size());
+		List<RegularEmployee> contractorEmployeesReturned = query.getResultList();
+		assertEquals(contractorEmployees.size(), contractorEmployeesReturned.size());
 	}
 
 	//--------------------------------------------------------------------------------
